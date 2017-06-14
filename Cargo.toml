@@ -1,0 +1,6 @@
+[package]
+name = "libproxy"
+version = "0.1.0"
+authors = ["Jonas Platte <jplatte+git@posteo.de>"]
+
+[dependencies]
