@@ -1,6 +1,11 @@
-use std::ffi::CStr;
+extern crate libc;
 
+mod error;
 mod proxy_sys;
+
+use std::ffi::{CStr, CString};
+use libc::{c_void, free};
+use error::Error;
 
 pub struct ProxyFactory(*mut proxy_sys::pxProxyFactory);
 
@@ -14,14 +19,31 @@ impl ProxyFactory {
         }
     }
 
-    pub fn get_proxies(&self, url: &CStr) /* -> NullTerminatedArray<OwnedCStr> */ {
-        let proxies = unsafe { proxy_sys::px_proxy_factory_get_proxies(self.0, url.as_ptr()) };
-        // TODO:
-        // * Create OwnedCStr: wrapper around *mut char that calls into C for drop
-        //   * Deref into CStr via CStr::from_ptr
-        // * Create NullTerminatedArray: wrapper around *mut *??? T where NULL indicates the end
-        //   * Deref into &{,mut} [T] with std::slice::from_raw_parts{,_mut}
-        // * Somehow make the two work together
+    pub fn get_proxies(&self, url: &str) -> Result<Vec<String>, Error> {
+        // TODO: Implement zero-cost version of this that uses CStr / libc-allocated CString
+
+        let url_c = CString::new(url)?;
+        let mut res = Vec::new();
+
+        unsafe {
+            let proxies = proxy_sys::px_proxy_factory_get_proxies(self.0, url_c.as_ptr());
+
+            if proxies.is_null() {
+                return Err(Error::ProxyResolveError);
+            }
+
+            let mut proxy_ptr = proxies;
+            while !(*proxy_ptr).is_null() {
+                let bytes = CStr::from_ptr(*proxy_ptr).to_bytes().to_owned();
+                res.push(String::from_utf8(bytes)?);
+                free(*proxy_ptr as *mut c_void);
+                proxy_ptr = proxy_ptr.offset(1);
+            }
+
+            free(proxies as *mut c_void);
+        }
+
+        Ok(res)
     }
 }
 
