@@ -2,6 +2,7 @@
 authors = ["Jonas Platte <jplatte+git@posteo.de>"]
 categories = ["api-bindings", "network-programming"]
 description = "Rust bindings for libproxy"
+documentation = "https://docs.rs/libproxy"
 keywords = ["proxy", "http"]
 license = "MIT"
 name = "libproxy"
