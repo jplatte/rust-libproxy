@@ -6,7 +6,7 @@
             "request": "launch",
             "name": "Debug",
             "program": "${workspaceRoot}/target/debug/examples/proxy",
-            "args": [],
+            "args": ["http://example.com/"],
             "cwd": "${workspaceRoot}"
         }
     ]

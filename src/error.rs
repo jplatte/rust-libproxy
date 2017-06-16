@@ -2,10 +2,24 @@ use std::ffi::NulError;
 use std::string::FromUtf8Error;
 
 #[derive(Debug)]
+pub struct ProxyResolutionError;
+
+#[derive(Debug)]
 pub enum Error {
-    ProxyResolveError,
+    /// Couldn't resolve the proxy for the given URL.
+    ProxyResolutionError(ProxyResolutionError),
+
+    /// The provided URL couldn't be converted to a CString.
     InvalidUrl(NulError),
+
+    /// One of the returned proxy URLs was not valid UTF-8.
     NonUtf8Proxy(FromUtf8Error),
+}
+
+impl From<ProxyResolutionError> for Error {
+    fn from(err: ProxyResolutionError) -> Error {
+        Error::ProxyResolutionError(err)
+    }
 }
 
 impl From<NulError> for Error {
