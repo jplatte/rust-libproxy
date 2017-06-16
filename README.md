@@ -1,5 +1,7 @@
 # rust-libproxy
 
+[![Crates.io](https://img.shields.io/crates/v/libproxy.svg)](https://crates.io/crates/libproxy)
+
 libproxy bindings for Rust.
 
 ## Example
