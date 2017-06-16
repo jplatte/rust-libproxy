@@ -8,6 +8,7 @@ use libc::{c_char, c_void, free};
 use error::ProxyResolutionError;
 use ffi::MallocCString;
 
+/// A container type for holding the result of `px_proxy_factory_get_proxies`.
 pub struct Proxies {
     data: *mut MallocCString,
     len: usize,
@@ -35,10 +36,12 @@ impl Proxies {
         }
     }
 
+    /// Extracts a slice containing the entire array.
     pub fn as_slice(&self) -> &[MallocCString] {
         unsafe { slice::from_raw_parts(self.data, self.len) }
     }
 
+    /// Extracts a mutable slice of the entire array.
     pub fn as_mut_slice(&mut self) -> &mut [MallocCString] {
         unsafe { slice::from_raw_parts_mut(self.data, self.len) }
     }

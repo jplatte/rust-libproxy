@@ -1,6 +1,7 @@
 use std::ffi::NulError;
 use std::string::FromUtf8Error;
 
+/// Couldn't resolve the proxy for the given URL.
 #[derive(Debug)]
 pub struct ProxyResolutionError;
 

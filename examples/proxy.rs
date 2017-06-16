@@ -1,3 +1,5 @@
+// Reimplementation of the proxy command line utitlity that comes with libproxy.
+
 extern crate libproxy;
 
 use std::env;
