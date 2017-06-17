@@ -2,7 +2,7 @@
 
 [![Crates.io](https://img.shields.io/crates/v/libproxy.svg)](https://crates.io/crates/libproxy)
 
-libproxy bindings for Rust.
+libproxy bindings for Rust – automatic proxy configuration management
 
 ## Example
 
