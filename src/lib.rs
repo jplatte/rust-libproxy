@@ -4,6 +4,8 @@
 //!
 //! [libproxy]: https://libproxy.github.io/libproxy/
 
+#![warn(missing_docs)]
+
 extern crate libc;
 
 pub use factory::ProxyFactory;

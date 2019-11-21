@@ -11,7 +11,7 @@ tasks:
   - run_checks: |
       cd rust-libproxy
       for toolchain in 1.28.0 stable beta nightly; do
-        cargo check --verbose
-        if ( rustup component list | grep -q rustfmt ); then cargo fmt -- --check; fi
-        if ( rustup component list | grep -q clippy ); then cargo clippy -- -A clippy::zero_width_space; fi
+        cargo test --verbose
+        if ( rustup component list | grep rustfmt | grep -q installed ); then cargo fmt -- --check; fi
+        if ( rustup component list | grep clippy | grep -q installed ); then cargo clippy; fi
       done
