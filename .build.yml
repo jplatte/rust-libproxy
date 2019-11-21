@@ -1,0 +1,17 @@
+image: archlinux
+packages:
+  - rustup
+tasks:
+  - setup_toolchains: |
+      rustup toolchain install 1.28.0 stable beta nightly
+      for toolchain in stable beta nightly; do
+        rustup component add rustfmt || true
+        rustup component add clippy || true
+      done
+  - run_checks: |
+      cd rust-libproxy
+      for toolchain in 1.28.0 stable beta nightly; do
+        cargo check --verbose
+        if ( rustup component list | grep -q rustfmt ); then cargo fmt -- --check; fi
+        if ( rustup component list | grep -q clippy ); then cargo clippy -- -A clippy::zero_width_space; fi
+      done
