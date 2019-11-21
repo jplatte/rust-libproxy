@@ -13,6 +13,11 @@ pub struct MallocCString(*mut c_char);
 
 impl MallocCString {
     /// Takes ownership of a string allocated by `malloc`.
+    ///
+    /// # Safety
+    ///
+    /// This function is safe to use only if `ptr` points to a string
+    /// allocated using libc's `malloc`.
     pub unsafe fn from_raw(ptr: *mut c_char) -> MallocCString {
         MallocCString(ptr)
     }

@@ -104,6 +104,7 @@ impl<'a> IntoIterator for &'a Proxies {
     type Item = &'a MallocCString;
     type IntoIter = slice::Iter<'a, MallocCString>;
 
+    #[allow(clippy::into_iter_on_ref)]
     fn into_iter(self) -> Self::IntoIter {
         self.as_slice().into_iter()
     }
@@ -113,6 +114,7 @@ impl<'a> IntoIterator for &'a mut Proxies {
     type Item = &'a mut MallocCString;
     type IntoIter = slice::IterMut<'a, MallocCString>;
 
+    #[allow(clippy::into_iter_on_ref)]
     fn into_iter(self) -> Self::IntoIter {
         self.as_mut_slice().into_iter()
     }
