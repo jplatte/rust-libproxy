@@ -81,9 +81,7 @@ impl ProxyFactory {
 
         self.get_proxies_raw(&url_c)?
             .into_iter()
-            .map(|c_str| {
-                String::from_utf8(c_str.to_bytes().to_owned()).map_err(From::from)
-            })
+            .map(|c_str| String::from_utf8(c_str.to_bytes().to_owned()).map_err(From::from))
             .collect()
     }
 
@@ -107,9 +105,7 @@ impl ProxyFactory {
     /// }
     /// ```
     pub fn get_proxies_raw(&self, url: &CStr) -> Result<Proxies, ProxyResolutionError> {
-        Proxies::new(unsafe {
-            proxy_sys::px_proxy_factory_get_proxies(self.0, url.as_ptr())
-        })
+        Proxies::new(unsafe { proxy_sys::px_proxy_factory_get_proxies(self.0, url.as_ptr()) })
     }
 }
 
