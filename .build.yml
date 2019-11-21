@@ -1,5 +1,6 @@
 image: archlinux
 packages:
+  - libproxy
   - rustup
 tasks:
   - setup_toolchains: |
