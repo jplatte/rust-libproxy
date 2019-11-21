@@ -1,6 +1,7 @@
 # rust-libproxy
 
 [![Crates.io](https://img.shields.io/crates/v/libproxy.svg)](https://crates.io/crates/libproxy)
+[![builds.sr.ht status](https://builds.sr.ht/~jplatte/rust-libproxy.svg)](https://builds.sr.ht/~jplatte/rust-libproxy)
 
 libproxy bindings for Rust – automatic proxy configuration management
 
