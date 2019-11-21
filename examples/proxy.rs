@@ -2,11 +2,10 @@
 
 extern crate libproxy;
 
-use std::env;
 use libproxy::ProxyFactory;
 
 fn main() {
-    let mut args = env::args();
+    let mut args = std::env::args();
     if args.len() != 2 {
         println!("Usage: proxy <url>");
         return;
