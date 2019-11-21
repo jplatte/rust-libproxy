@@ -10,6 +10,7 @@ use proxy_sys;
 /// A ProxyFactory should be kept around as long as possible as it contains cached data to increase
 /// performance. Memory usage should be minimal (cache is small) and the cache lifespan is handled
 /// automatically.
+#[repr(transparent)]
 pub struct ProxyFactory(*mut proxy_sys::pxProxyFactory);
 
 impl ProxyFactory {

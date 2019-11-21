@@ -9,6 +9,7 @@ use libc::{c_char, c_void, free};
 /// Useful for when you receive a string from C code that you have to free yourself, or for when a
 /// C API that you are calling expects to take ownership of a string provided by you. (the latter
 /// is not implemented yet though)
+#[repr(transparent)]
 pub struct MallocCString(*mut c_char);
 
 impl MallocCString {
