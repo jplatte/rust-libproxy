@@ -7,7 +7,7 @@ keywords = ["proxy", "http"]
 license = "MIT"
 name = "libproxy"
 readme = "README.md"
-repository = "https://github.com/jplatte/rust-libproxy"
+repository = "https://git.sr.ht/~jplatte/rust-libproxy"
 version = "0.1.1"
 
 [dependencies]
